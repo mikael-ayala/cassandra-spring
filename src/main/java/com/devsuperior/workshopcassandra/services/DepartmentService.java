@@ -26,4 +26,12 @@ public class DepartmentService {
                 .orElseThrow(() -> new ResourceNotFoundException("Id não encontrado"));
         return new DepartmentDTO(department);
     }
+
+    public DepartmentDTO insert(DepartmentDTO departmentDTO) {
+        Department department = new Department();
+        department.setId(UUID.randomUUID());
+        department.setName(departmentDTO.getName());
+        department = departmentRepository.save(department);
+        return new DepartmentDTO(department);
+    }
 }
