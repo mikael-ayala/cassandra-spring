@@ -42,4 +42,12 @@ public class DepartmentService {
         department = departmentRepository.save(department);
         return new DepartmentDTO(department);
     }
+
+    public void deleteById(UUID id) {
+        if (!departmentRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Id inexistente");
+        }
+
+        departmentRepository.deleteById(id);
+    }
 }
