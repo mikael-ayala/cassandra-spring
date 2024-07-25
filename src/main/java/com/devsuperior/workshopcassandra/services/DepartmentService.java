@@ -34,4 +34,12 @@ public class DepartmentService {
         department = departmentRepository.save(department);
         return new DepartmentDTO(department);
     }
+
+    public DepartmentDTO update(UUID id, DepartmentDTO departmentDTO) {
+        Department department = departmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Id não encontrado"));
+        department.setName(departmentDTO.getName());
+        department = departmentRepository.save(department);
+        return new DepartmentDTO(department);
+    }
 }
