@@ -23,7 +23,14 @@ public class ProductService {
     }
 
     public List<ProductDTO> findByDepartment(String department) {
-        List<Product> products = productRepository.findByDepartment(department);
+        List<Product> products;
+
+        if ("".equals(department)) {
+            products = productRepository.findAll();
+        } else {
+            products = productRepository.findByDepartment(department);
+        }
+
         return products.stream().map(ProductDTO::new).toList();
     }
 }
