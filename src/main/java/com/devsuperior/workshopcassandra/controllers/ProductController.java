@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -19,5 +20,13 @@ public class ProductController {
     public ResponseEntity<ProductDTO> findById(@PathVariable UUID id) {
         ProductDTO product = productService.findById(id);
         return ResponseEntity.ok(product);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductDTO>> findByDepartment(
+            @RequestParam(name = "department", defaultValue = "") String department
+    ) {
+        List<ProductDTO> products = productService.findByDepartment(department);
+        return ResponseEntity.ok(products);
     }
 }
